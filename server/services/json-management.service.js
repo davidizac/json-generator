@@ -1,8 +1,8 @@
 const amqp = require('amqplib/callback_api');
 
-function publishToScanner(rabbitmq,message){
+function publishToScanner(rabbitmq,message,vhost){
     return new Promise((resolve,reject) => {
-        const connectionString = `amqp://${rabbitmq.username}:${rabbitmq.password}@${rabbitmq.host}:${rabbitmq.port}${rabbitmq.vhost ? `/${rabbitmq.vhost}` : ''}`;
+        const connectionString = `amqp://${rabbitmq.username}:${rabbitmq.password}@${rabbitmq.host}:${rabbitmq.port}/${vhost}`;
         amqp.connect(connectionString,(err, connection)=> {
             if(err){
                 return reject(err)
@@ -41,7 +41,7 @@ function getRabbitMQdata(){
 function generateJSON(json){
     const message =  {
         uuid: "",
-        name: "flow_1",
+        name: json.test_name,
         order_id: "",
         environment: json.environment,
         json_folder: "",
@@ -56,7 +56,7 @@ function generateJSON(json){
             lab_name: json.lab_name,
             case_type: json.case_type,
             model_type:json.model_type,
-            retries: 3,
+            retries: json.max_attempts,
             attempts: 0
         },
         lab_stage: {
@@ -76,6 +76,6 @@ function generateJSON(json){
 module.exports = {
     sendJSONToScannerQueue:(json)=> {
         const rabbitmq = getRabbitMQdata();
-        return publishToScanner(rabbitmq,JSON.stringify(generateJSON(json)));
+        return publishToScanner(rabbitmq,JSON.stringify(generateJSON(json)),json.environment);
     }
 }

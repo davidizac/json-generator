@@ -1,4 +1,4 @@
-export const ENVIRONEMENT = ['E5','E6','E7'];
+export const ENVIRONMENT = ['E5','E6','E7'];
 export const CASES=['Ortho','Restorative']
 
 export const getModelType = (caseType)=> {

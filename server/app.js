@@ -3,7 +3,7 @@ const path = require('path');
 const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
-const sendJsonController = require('./controllers/sendjson.controller')
+const { sendjson } = require('./controllers/json-management.controller')
 
 app.use(express.static(path.join(__dirname, "/dist")));
 
@@ -27,7 +27,7 @@ app.use((req, res, next) => {
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.post("/api/send-json", sendJsonController.sendjson)
+app.post("/api/create", sendjson)
 
 app.all("*", (req, res) => {
   res.sendFile(path.join(__dirname, "/dist", "index.html"));
