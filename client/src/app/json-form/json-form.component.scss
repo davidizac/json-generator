@@ -1,0 +1,25 @@
+.mat-form-field{
+    padding: 20px 30px;
+}
+button{
+    width: 158px;
+    border-radius: 35px;
+    margin-top: 24px;
+    font-size: 19px;
+    padding: 11px;
+}
+
+.form{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+mat-progress-spinner{
+    position: absolute;
+    top: 238px;
+}
+
+.info{
+    margin-top: 15px;
+    display: block;
+}

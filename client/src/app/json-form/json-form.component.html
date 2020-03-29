@@ -1,0 +1,61 @@
+<div class="form">
+    <form [formGroup]="testForm">
+        <mat-form-field class="example-full-width">
+            <mat-label>Doctor Email</mat-label>
+            <input matInput placeholder="Enter email" formControlName="doctor_email" required>
+            <mat-error *ngIf="testForm.controls.doctor_email.invalid">{{getErrorMessage()}}</mat-error>
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+            <mat-label>Doctor Password</mat-label>
+            <input matInput placeholder="Password" formControlName="doctor_pass" required>
+            <mat-error *ngIf="testForm.controls.doctor_pass.invalid">'You must enter a password</mat-error>
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+            <mat-label>Patient First Name</mat-label>
+            <input matInput placeholder="First Name" formControlName="first_name" required>
+            <mat-error *ngIf="testForm.controls.first_name.invalid">'You must enter a first name</mat-error>
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+            <mat-label>Patient Last Name</mat-label>
+            <input matInput placeholder="Last Name" formControlName="last_name" required>
+            <mat-error *ngIf="testForm.controls.last_name.invalid">'You must enter a last name</mat-error>
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+            <mat-label>Environment</mat-label>
+            <mat-select formControlName="environment">
+                <mat-option *ngFor="let env of environment" [value]="env">
+                  {{env}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+            <mat-label>Company Id</mat-label>
+            <input matInput placeholder= "Company Id" formControlName="company_id" required>
+            <mat-error *ngIf="testForm.controls.company_id.invalid">'You must enter a company id</mat-error>
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+            <mat-label>Lab Name</mat-label>
+            <input matInput placeholder="Lab Name" formControlName="lab_name" required>
+            <mat-error *ngIf="testForm.controls.lab_name.invalid">'You must enter a lab name</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Case Type</mat-label>
+            <mat-select formControlName="case_type">
+                <mat-option *ngFor="let case of cases" [value]="case">
+                  {{case}}
+                </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Model Type</mat-label>
+            <mat-select formControlName="model_type">
+                <mat-option *ngFor="let model of models" [value]="model">
+                  {{model}}
+                </mat-option>
+            </mat-select>
+          </mat-form-field>
+    </form>
+    <button [disabled]="testForm.invalid" (click)="createTest()" type="submit" mat-raised-button color="primary">Create Test</button> 
+    <span class="info">{{information}}</span>  
+    <mat-progress-spinner class="example-margin" color="primary" mode="indeterminate" value="50" *ngIf="isLoading"></mat-progress-spinner>
+</div>
